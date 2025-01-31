@@ -1,16 +1,17 @@
 class Solution {
 public:
     bool isAnagram(string s, string t) {
-        if (s.length() != t.length())
-            return false;
-        std::map<char, int> mapS, mapT;
+        std::array<int, 26> count{};
+        for (const char c : s)
+            count[c - 'a']++;
+        for (const char c : t)
+            count[c - 'a']--;
 
-        for (char c : s) {
-            mapS[c]++;
+        for (int freq : count) {
+            if (freq != 0)
+                return false;
         }
-        for (char c : t) {
-            mapT[c]++;
-        }
-        return mapT == mapS;
+
+        return true;
     }
 };
