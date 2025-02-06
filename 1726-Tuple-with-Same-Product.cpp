@@ -1,16 +1,18 @@
 class Solution {
 public:
     int tupleSameProduct(vector<int>& nums) {
-        std::map<int, std::vector<int>> m;
+        int n = nums.size();
+        std::unordered_map<int, int> m;
         int result = 0;
-        for (int i = 0; i < nums.size(); i++) {
-            for (int j = i + 1; j < nums.size(); j++) {
+        for (int i = 0; i < n - 1; i++) {
+            for (int j = i + 1; j < n; j++) {
                 int multi = nums[i] * nums[j];
-                m[multi].push_back(nums[i]);
-                m[multi].push_back(nums[j]);
-                result += (m[multi].size() / 2) - 1;
+                m[multi]++;
             }
         }
-        return result * 8;
+        for (const std::pair<const int, int>& p : m) {
+            result += 4 * p.second * (p.second - 1);
+        }
+        return result;
     }
 };
