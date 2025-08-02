@@ -11,3 +11,18 @@ var containsDuplicate = function(nums) {
     }
     return false;
 };
+
+
+
+var containsDuplicate = function(nums) {
+    const tempMap = new Map();
+    for (let i = 0; i < nums.length; i++) {
+        const value = tempMap.get(nums[i]) ?? 0;
+        if (value >= 1) {
+            return true;
+        }
+        tempMap.set(nums[i], value + 1);
+    }
+    return false;
+};
+
